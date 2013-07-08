@@ -38,6 +38,7 @@ $centerLongitude = $modx->getOption('centerLongitude', $scriptProperties, 6.6148
 $centerLatitude = $modx->getOption('centerLatitude', $scriptProperties, 52.40441);
 $markerImage = $modx->getOption('markerImage', $scriptProperties, '0');
 $sortDir = $modx->getOption('sortDir', $scriptProperties, 'ASC');
+$sortBy = $modx->getOption('sortBy', $scriptProperties, 'id');
 $limit = $modx->getOption('limit', $scriptProperties, 0);
 
 // Templating parameters
@@ -73,7 +74,8 @@ $modx->regClientStartupHTMLBlock($storeLocator->getChunk($scriptWrapperTpl, arra
 )));
 
 // Parse store chunks
-$query = $modx->newQuery('slStore'); 
+$query = $modx->newQuery('slStore');
+$query->sortby($sortBy, $sortDir);
 $query->sortby('sort', $sortDir);
 $query->limit($limit);
 
